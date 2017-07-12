@@ -93,8 +93,28 @@ let formData = [
   // Log the string "First Name"
   console.log( first.label );
 } )();
-
+//PRINT OUT from GOOGLE CHROME: Object {type: "text", label: "First Name", id: "user-first-name", icon: "fa-user", options: Array(0)}
 
 // -------- Your Code Goes Below this Line --------
+let _fields=document.querySelector('#fields') // also can use getElementbyid (no pound sign)
+for (var i = 0; i < formData.length; i++) {
+      let _data = formData[i] //optional, makes it easier THAN referencing formData[1] throughout document
+      console.log ('Create HTML for ${_data.label}') // new way of referencing, old way is  + 'data.label'
 
+    if(_data.type==='textarea'){
+      let textarea = document.createElement('textarea')
+      textarea.placeholder=_data.label //creating property of text area
+      textarea.id=_data.id  // creating property of text area
 
+      _fields.appendChild(textarea)
+    }else {
+      let element = document.createElement('input')
+      // to set HTML attributes on newly queried DOm elements
+      // the formula is element.attribute = value
+      element.type = _data.type
+      element.placeholder = _data.label
+      element.id = _data.id
+
+      _fields.appendChild(element)
+}
+}
