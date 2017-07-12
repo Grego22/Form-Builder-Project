@@ -105,9 +105,24 @@ for (var i = 0; i < formData.length; i++) {
       let textarea = document.createElement('textarea')
       textarea.placeholder=_data.label //creating property of text area
       textarea.id=_data.id  // creating property of text area
-
       _fields.appendChild(textarea)
-    }else {
+
+    }else if (_data.type === 'select'){
+      let select = document.createElement('select')
+      select.id = _data.id
+
+      //loop inside a loop.  we want to create an elemnt for each options
+      for (var i = 0; i < _data.options.length; i++) {
+        let _opt = _data.options[i] //optional make things easier (instead of _data.options)
+        let option = document.createElement('option')
+        option.value = _opt.value
+        option.textContent = _opt.label //similar to option.innerHtml
+        select.appendChild(option)
+      }
+      _fields.appendChild(select)
+
+    }
+    else {
       let element = document.createElement('input')
       // to set HTML attributes on newly queried DOm elements
       // the formula is element.attribute = value
